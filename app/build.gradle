@@ -8,12 +8,12 @@ android {
         applicationId "com.taberstorm.taberstorch"
         minSdkVersion 15
         targetSdkVersion 20
-        versionCode 3
-        versionName "1.0"
+        versionCode 6
+        versionName "1.2"
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

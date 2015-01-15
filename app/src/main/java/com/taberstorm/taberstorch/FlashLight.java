@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class FlashLight extends Activity {
@@ -30,12 +31,15 @@ public class FlashLight extends Activity {
             camParams = camera.getParameters();
             camera.startPreview();
             hasCam = true;
+            Toast.makeText(getApplicationContext(), "Ready!", Toast.LENGTH_SHORT).show();
 
 
         }
         catch (Throwable t)
         {
             t.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error with camera", Toast.LENGTH_LONG).show();
+            hasCam = false;
         }
         isOn = false;
         power = (Button) findViewById(R.id.toggleBut);
@@ -43,17 +47,22 @@ public class FlashLight extends Activity {
         power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isOn == false)
-                {
-                    isOn = true;
-                    power.setBackgroundResource(R.drawable.onbut);
+                if(hasCam) {
+                    if (!isOn) {
+                        isOn = true;
+                        power.setBackgroundResource(R.drawable.onbut);
+                        text.setText(R.string.power_on);
+                    } else {
+                        isOn = false;
+                        power.setBackgroundResource(R.drawable.offbut);
+                        text.setText(R.string.power_off);
+                    }
+                    turnOnOff(isOn);
                 }
                 else
                 {
-                    isOn = false;
-                    power.setBackgroundResource(R.drawable.offbut);
+                    Toast.makeText(getApplicationContext(), "No Camera found", Toast.LENGTH_LONG).show();
                 }
-                turnOnOff(isOn);
             }
         });
 
@@ -83,13 +92,10 @@ public class FlashLight extends Activity {
         if(on)
         {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            text.setText(R.string.power_on);
-
         }
         if(!on)
         {
             camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            text.setText(R.string.power_off);
         }
         camera.setParameters(camParams);
         camera.startPreview();

@@ -12,21 +12,25 @@
         android:text="@string/hello_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/appText"/>
+        android:id="@+id/appText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/power_off"
-        android:id="@+id/powerState"/>
+        android:id="@+id/powerState"
+        android:layout_below="@+id/appText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
     <Button
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:background="@drawable/offbut"
         android:checked="false"
         android:paddingRight="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_centerVertical="true"
         android:id="@+id/toggleBut"
          />
 
